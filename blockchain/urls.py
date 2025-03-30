@@ -17,6 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from blockchain import views
+from .views import get_balance
+from django.contrib import admin
+from django.urls import path, include
+from blockchain.views import get_balance 
 
 urlpatterns = [
     path('admin/', admin.site.urls),  # Default Admin Panel
@@ -29,6 +33,8 @@ urlpatterns = [
     path("solana-latest-block/", views.solana_latest_block_view, name="solana_latest_block"),
     path("about_us/",views.aboutus,name="aboutus"),
     path("wallet/",views.wallet,name="wallet"),
+    path('api/balance/<str:network>/', get_balance, name='get_balance'),
+
 
 
 

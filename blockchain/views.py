@@ -6,6 +6,9 @@ from blockchain.web3_utils import get_connection_status
 from django.http import JsonResponse
 from .utils.solana_utils import get_solana_connection_status, get_latest_solana_block
 import requests
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+
 
 def homepage(request):
     return render(request,"index.html")
@@ -92,9 +95,23 @@ def solana_latest_block_view(request):
         return JsonResponse({"error": latest_block}, status=500)
 
 def wallet(request):
-    return render(request,"wallet.html")
+    if request.method == "POST":
+        entered_name = request.POST.get("ename")
+        if entered_name:
+            request.session["username"] = entered_name  # Store username in session
 
+    # Retrieve username from session (fallback to authenticated user)
+    username = request.session.get("username", request.user.username if request.user.is_authenticated else "Guest")
 
+    print("DEBUG: Username being sent to template:", username)  # Debugging line
 
+    return render(request, "wallet.html", {"username": username})
 
-
+@api_view(['GET'])
+def get_balance(request, network):
+    balances = {
+        "ethereum": "50.9412 ETH",
+        "solana": "120 SOL",
+        "polygon": "200 MATIC",
+    }
+    return Response({"network": network, "balance": balances.get(network, "Unknown")})

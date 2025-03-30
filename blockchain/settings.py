@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'wallets',
     'blockchain',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

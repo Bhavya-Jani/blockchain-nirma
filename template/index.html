@@ -64,6 +64,8 @@
     </style>
 </head>
 <body>
+    {%extends 'base.html' %}
+    {%block 'content' %}
     <div class="container">
         <form method="post" action="{% url 'try' %}" autocomplete="off">
             {% csrf_token %}
@@ -90,5 +92,6 @@
             <button type="Submit">Submit </button>
         </form>
     </div>
+{%endblock%}
 </body>
 </html>

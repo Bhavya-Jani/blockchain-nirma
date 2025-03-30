@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Chain Wallet</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #365ae1; 
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            padding: 25px;
+            width: 380px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .container:hover {
+            transform: translateY(-5px);
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #fae20e; 
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        .network-info {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .network-info h2 {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 150px;
+            flex-shrink: 1;
+        }
+        select {
+            padding: 10px;
+            border-radius: 5px;
+            margin-left: 10px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            flex-shrink: 0;
+            min-width: 120px;
+        }
+        select:hover {
+            background-color: #ffe700;
+        }
+        .balance {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+            border-radius: 10px;
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
+        }
+        .actions {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+        .action-button {
+            background-color: #fae20e;
+            color: #030000;
+            border: none;
+            border-radius: 5px;
+            padding: 12px 18px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .action-button:hover {
+            background: linear-gradient(to right, #FFD700, #c6c925, #cfcf6c);
+        }
+        .status {
+            text-align: center;
+            margin-top: 15px;
+            font-weight: bold;
+            color: green;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        p {
+            font-size: 14px;
+            color: #555;
+        }
+        @media (max-width: 400px) {
+            .container {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="network-info">
+                <h1>Multi-Chain Wallet</h1>
+            </div>
+            <div>
+                <h2 id="username">Welcome {{ username }}</h2>
+                <select id="networkSelector" onchange="changeNetwork()">
+                    <option value="ethereum">Ethereum</option>
+                    <option value="solana">Solana</option>
+                    <option value="polygon">Polygon</option>
+                    <option value="starknet">StarkNet</option>
+                    <option value="base">Base</option>
+                    <option value="celo">Celo</option>
+                    <option value="unichain">Unichain</option>
+                </select>
+            </div>
+        </header>
+
+        <div class="balance" id="balanceDisplay">
+            <h2>Loading...</h2>
+        </div>
+
+        <div class="status" id="statusMessage"></div>
+
+        <div class="actions">
+            <button class="action-button" onclick="sendTransaction()">Send</button>
+            <button class="action-button" onclick="receiveTransaction()">Receive</button>
+            <button class="action-button" onclick="swapTokens()">Swap</button>
+        </div>
+    </div>
+
+    <script>
+        let currentNetwork = "ethereum";
+
+        function changeNetwork() {
+            currentNetwork = document.getElementById("networkSelector").value;
+            loadBalance();
+            updateStatus();
+        }
+
+        function loadBalance() {
+            const balanceDisplay = document.getElementById("balanceDisplay");
+            if (currentNetwork === "ethereum") {
+                balanceDisplay.innerHTML = `<h2>50.9412 ETH</h2><p>$36,479.32 USD</p>`;
+            } else if (currentNetwork === "solana") {
+                balanceDisplay.innerHTML = `<h2>120 SOL</h2><p>$3,450.00 USD</p>`;
+            } else if (currentNetwork === "polygon") {
+                balanceDisplay.innerHTML = `<h2>200 MATIC</h2><p>$1,200.00 USD</p>`;
+            } else if (currentNetwork === "starknet") {
+                balanceDisplay.innerHTML = `<h2>150 STRK</h2><p>$500.00 USD</p>`;
+            } else if (currentNetwork === "base") {
+                balanceDisplay.innerHTML = `<h2>3.45 ETH</h2><p>$11,200.00 USD</p>`;
+            } else if (currentNetwork === "celo") {
+                balanceDisplay.innerHTML = `<h2>500 CELO</h2><p>$3,000.00 USD</p>`;
+            }else if (currentNetwork === "unichain") {
+                balanceDisplay.innerHTML = `<h2>500 UNI</h2><p>$3,000.00 USD</p>`;
+}
+
+}
+
+       
+        async function updateStatus() {
+    const statusMessage = document.getElementById("statusMessage");
+    let rpcUrl = "";
+    let requestBody = {};
+
+    if (currentNetwork === "polygon") {
+        rpcUrl = "https://polygon-rpc.com";
+        requestBody = {
+            jsonrpc: "2.0",
+            method: "eth_blockNumber",
+            params: [],
+            id: 1
+        };
+    } else if (currentNetwork === "ethereum") {
+        rpcUrl = "https://mainnet.infura.io/v3/fb0e51784bc4476fb850692c69f4c728"; // Replace with your Infura ID
+        requestBody = {
+            jsonrpc: "2.0",
+            method: "eth_blockNumber",
+            params: [],
+            id: 1
+        };
+    } else if (currentNetwork === "solana") {
+        rpcUrl = "https://solana-mainnet.g.alchemy.com/v2/jTiRmRAcsAXUgxQXa3qO-HmoZFcSbKtj";
+        requestBody = {
+            jsonrpc: "2.0",
+            method: "getBlockHeight",
+            params: [],
+            id: 1
+        };
+    } else if (currentNetwork === "starknet") {  // 🔥 NEW STARKNET CONNECTION
+        rpcUrl = "https://starknet-mainnet.infura.io/v3/fb0e51784bc4476fb850692c69f4c728";
+        requestBody = {
+            jsonrpc: "2.0",
+            method: "starknet_blockNumber",
+            params: [],
+            id: 1
+        };
+    } else if (currentNetwork === "base") {  
+        rpcUrl = "https://base-mainnet.infura.io/v3/fb0e51784bc4476fb850692c69f4c728";
+        requestBody = {
+            jsonrpc: "2.0",
+            method: "eth_blockNumber",
+            params: [],
+            id: 1
+        };
+    } else if (currentNetwork === "celo") {  
+    rpcUrl = "https://celo-mainnet.infura.io/v3/fb0e51784bc4476fb850692c69f4c728";
+    requestBody = {
+        jsonrpc: "2.0",
+        method: "eth_blockNumber",
+        params: [],
+        id: 1
+    };
+    } else if (currentNetwork === "unichain") {  
+    rpcUrl = "https://unichain-mainnet.infura.io/v3/fb0e51784bc4476fb850692c69f4c728";
+    requestBody = {
+        jsonrpc: "2.0",
+        method: "eth_blockNumber",
+        params: [],
+        id: 1
+    };
+
+    }
+
+    try {
+        const response = await fetch(rpcUrl, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(requestBody)
+        });
+
+        const data = await response.json();
+        console.log("API Response:", data); // Debugging
+
+        if (data.result) {
+            let latestBlock = data.result; 
+
+            if (currentNetwork !== "solana" && currentNetwork !== "starknet") {
+                latestBlock = parseInt(data.result, 16); // Convert hex to decimal for Ethereum & Polygon
+            }
+
+            statusMessage.innerHTML = `✅ Connected to ${currentNetwork} successfully! Latest Block: ${latestBlock}`;
+        } else {
+            statusMessage.innerHTML = `❌ Failed to connect to ${currentNetwork}.`;
+        }
+    } catch (error) {
+        console.error("Fetch Error:", error);
+        statusMessage.innerHTML = `❌ Error connecting to ${currentNetwork}.`;
+    }
+}
+
+        function sendTransaction() {
+            alert(`Simulated Send on ${currentNetwork}`);
+        }
+
+        function receiveTransaction() {
+            alert(`Simulated Receive on ${currentNetwork}`);
+        }
+
+        function swapTokens() {
+            alert(`Simulated Swap on ${currentNetwork}`);
+        }
+
+        window.onload = () => {
+            loadBalance();
+            updateStatus();
+        };
+    </script>
+</body>
+</html>

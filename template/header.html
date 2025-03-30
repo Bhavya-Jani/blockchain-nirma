@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>homepage</title>
+
+    <style>
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            text-align: center;
+            background-color: #6d0b2b;
+        }
+        li
+        {
+            float: left;
+        }
+        li a{
+            display: block;
+            color: white;
+            text-align: center;
+            padding:  14px 16px;
+            text-decoration: none;
+        }
+        li a:hover {
+            background-color: #010c22;
+        }
+    </style>
+</head>
+<body>   
+        <ul>
+        <li><a class="active" href={% url 'Home' %}>Home</a></li>
+        <li><a class="active" href={% url 'aboutus' %}>About Us</a></li>
+        <li><a class="active" href={% url 'login' %}>Login</a></li>
+        <li><a class="active" href="/admin/wallets/wallet/">Admin</a></li>
+        </ul>
+        
+</body>
+</html>
