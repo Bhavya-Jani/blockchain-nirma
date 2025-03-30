@@ -3,12 +3,37 @@ from django.shortcuts import render,redirect
 from wallets.models import Wallet
 from django.contrib.auth.hashers import check_password
 from blockchain.web3_utils import get_connection_status
-from blockchain.web3_utils import get_eth_balance
-
-
+from django.http import JsonResponse
+from .utils.solana_utils import get_solana_connection_status, get_latest_solana_block
+import requests
 
 def homepage(request):
     return render(request,"index.html")
+
+def aboutus(request):
+    return render(request,"about_us.html")
+
+def signin(request):
+    return render(request,"sign_in.html")
+
+def verify_recaptcha(recaptcha_response):
+    """Verify reCAPTCHA response with Google's API"""
+    secret_key = settings.RECAPTCHA_SECRET_KEY
+    url = "https://www.google.com/recaptcha/api/siteverify"
+    payload = {"secret": secret_key, "response": recaptcha_response}
+    response = requests.post(url, data=payload).json()
+    return response.get("success", False)
+
+def try_view(request):
+    if request.method == "POST":
+        recaptcha_response = request.POST.get("g-recaptcha-response")
+
+        if not verify_recaptcha(recaptcha_response):
+            return JsonResponse({"status": "error", "message": "reCAPTCHA verification failed"})
+
+        return JsonResponse({"status": "success", "message": "Human verification successful!"})
+
+    return render(request, "try.html")
 
 def tryhtml(request):
     if request.method == "POST":
@@ -52,8 +77,24 @@ def blockchain_status(request):
     status = get_connection_status()
     return render(request, 'status.html', {'status': status})
 
-def block_status(request):
-    status1=get_eth_balance()
-    return render(request,'eth_status.html',{'status1':status1})
+def solana_status_view(request):
+    """Django view to check Solana network status"""
+    status = get_solana_connection_status()
+    return JsonResponse({"status": status})
+
+def solana_latest_block_view(request):
+    """Django view to get the latest Solana block (slot number)"""
+    latest_block = get_latest_solana_block()
+    
+    if isinstance(latest_block, int):  # Ensure it's an integer before returning JSON
+        return JsonResponse({"latest_block": latest_block})
+    else:
+        return JsonResponse({"error": latest_block}, status=500)
+
+def wallet(request):
+    return render(request,"wallet.html")
+
+
+
 
 

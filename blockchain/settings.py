@@ -125,4 +125,6 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 INFURA_URL = "https://mainnet.infura.io/v3/fb0e51784bc4476fb850692c69f4c728"
-
+SOLANA_RPC_URL = "https://api.mainnet-beta.solana.com"
+RECAPTCHA_SITE_KEY = "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"  # Google's test key
+RECAPTCHA_SECRET_KEY = "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe"  # Google's test secret

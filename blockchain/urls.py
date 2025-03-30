@@ -19,13 +19,16 @@ from django.urls import path
 from blockchain import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('',views.homepage),
+    path('admin/', admin.site.urls),  # Default Admin Panel
+    path('',views.homepage,name='Home'),
     path('try/',views.tryhtml,name='try'),
     path('login/', views.login_view, name='login'),
+    path('sign_up/',views.signin,name="signin"),
     path('status/', views.blockchain_status, name='blockchain_status'),
-    path('status1/', views.block_status, name='block_eth_status'),
-
+    path("solana-status/", views.solana_status_view, name="solana_status"),
+    path("solana-latest-block/", views.solana_latest_block_view, name="solana_latest_block"),
+    path("about_us/",views.aboutus,name="aboutus"),
+    path("wallet/",views.wallet,name="wallet"),
 
 
 
