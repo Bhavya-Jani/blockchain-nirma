@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background: #020011 url('https://www.transparenttextures.com/patterns/black-felt.png') repeat; /* Dark Background with Subtle Texture */
+            color: #fff;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-attachment: fixed;
+        }
+
+        /* Container Styles */
+        .container {
+            background: #12174781; /* Deep Royal Blue */
+            max-width: 400px;
+            width: 100%;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.6); /* Golden Shadow */
+            border: 3px solid #FFD700; /* Golden Border */
+            text-align: center;
+        }
+
+        h2 {
+            color: #FFD700; /* Golden Color */
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        /* Label Styles */
+        label {
+            font-weight: bold;
+            display: block;
+            text-align: left;
+            margin: 15px 0 5px;
+            color: #FFD700;
+        }
+
+        /* Input Field Styles */
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            border: 1px solid #FFD700; /* Golden Border */
+            border-radius: 5px;
+            background-color: #333;
+            color: #fff;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        input:focus {
+            border-color: #FFD700;
+            outline: none;
+            background-color: #444;
+        }
+
+        /* Button Styles */
+        button {
+            margin-top: 20px;
+            width: 100%;
+            background-color: #FFD700; /* Golden Button */
+            color: black;
+            padding: 12px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            background: linear-gradient(90deg, #FFD700, #c6c925, #cfcf6c);
+            background-size: 200%;
+            transform: scale(1.05);
+        }
+
+        /* Error Message */
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form id="loginForm">
+
+            <h2>Login Form</h2>
+
+            <label for="ename">Enter Name:</label>
+            <input type="text" id="ename" name="ename" pattern="[A-Za-z ]+" placeholder="Rock Wallet" required>
+
+            <label for="epass">Enter Password:</label>
+            <input type="password" id="epass" name="epass" minlength="6" placeholder="********" required>
+
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const name = document.getElementById('ename').value.trim();
+            const password = document.getElementById('epass').value;
+
+            const storedName = localStorage.getItem('username');
+            const storedPassword = localStorage.getItem('password');
+
+            if (name === storedName && password === storedPassword) {
+                alert('Login successful!');
+                window.location.href = 'wallet_dashboard.html'; // Redirect to dashboard
+            } else {
+                alert('Invalid credentials. Please try again.');
+            }
+        });
+    </script>
+</body>
+</html>

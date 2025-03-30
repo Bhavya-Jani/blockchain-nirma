@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blockchain Strengths</title>
+    <style>
+        /* Global Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298); /* Subtle gradient */
+            color: #fff;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Navbar Styles */
+        nav {
+            background-color: rgba(0, 0, 0, 0.7); 
+            padding: 15px 0;
+            width: 100%;
+            text-align: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin: 0 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #FFD700;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #fff;
+        }
+
+        /* Content Styling */
+        .content {
+            margin-top: 80px; /* To prevent overlap with the navbar */
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #FFD700;
+        }
+
+        section {
+            background-color: rgba(18, 23, 71, 0.9);
+            padding: 20px;
+            margin: 20px auto;
+            border-radius: 8px;
+            max-width: 800px;
+            width: 90%;
+            border: 2px solid #FFD700;
+        }
+
+        section h2 {
+            color: #FFD700;
+            margin-bottom: 10px;
+        }
+
+        section b {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+            color: #FFD700;
+        }
+
+        section p {
+            color: #fff;
+            font-size: 16px;
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+            }
+
+            section {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <ul>
+            <li><a href="#starknet">Starknet</a></li>
+            <li><a href="#ethereum">Ethereum</a></li>
+            <li><a href="#solana">Solana</a></li>
+            <li><a href="#base">Base</a></li>
+            <li><a href="#polygon">Polygon</a></li>
+        </ul>
+    </nav>
+    <div class="hero-img">
+        <img src="assets/img/hero-img.svg" alt="" class="wow fadeInRight"  data-wow-delay=".5s">
+    </div>
+    <!-- Content Section -->
+    <div class="content">
+        <h2>Confused About Choosing the Right Blockchain Network?</h2>
+        <h2>Here’s Detailed Information About Which Blockchain Suits You Best:</h2>
+        <h2>Strengths of Different Blockchain Networks</h2>
+    </div>
+
+    <!-- Blockchain Sections -->
+    <section id="starknet">
+        <h2>Starknet</h2>
+        <b>Main Strength:</b>
+        <p>Scalability: Starknet is a Layer 2 solution for Ethereum, leveraging Zero-Knowledge (ZK) Rollups to handle thousands of transactions without congestion.</p>
+    </section>
+
+    <section id="ethereum">
+        <h2>Ethereum</h2>
+        <b>Main Strength:</b>
+        <p>Ethereum is famous for its smart contract functionality, enabling decentralized applications (DApps) and decentralized finance (DeFi) platforms to thrive.</p>
+    </section>
+
+    <section id="solana">
+        <h2>Solana</h2>
+        <b>Main Strength:</b>
+        <p>Solana offers extremely fast transaction speeds and low costs, making it a top choice for high-performance blockchain applications.</p>
+    </section>
+
+    <section id="base">
+        <h2>Base</h2>
+        <b>Main Strength:</b>
+        <p>Developer-Friendly: Base is deeply integrated with Ethereum's ecosystem, making it easy for developers to migrate their dApps.</p>
+    </section>
+
+    <section id="polygon">
+        <h2>Polygon</h2>
+        <b>Main Strength:</b>
+        <p>It is highly scalable and can easily support enterprise solutions.</p>
+    </section>
+
+</body>
+</html>
