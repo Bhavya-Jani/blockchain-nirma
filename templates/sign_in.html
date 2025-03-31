@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: black;
+            text-align: center;
+            padding: 20px;
+            color: #FFD700;
+        }
+        .container {
+            background: #1a1a1a;
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+        }
+        h2 {
+            color: #FFD700;
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            text-align: left;
+            margin-top: 10px;
+            color: #FFD700;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #FFD700;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+            background-color: #1a1a1a;
+            color: #FFD700;
+        }
+        button {
+            margin-top: 20px;
+            width: 100%;
+            background-color: navy;
+            color: #FFD700;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #FFD700;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    {% extends 'base.html' %}
+    {% block 'content' %}
+    <div class="container">
+        <h2>Sign Up :</h2>
+        
+        {% if error %}
+            <p style="color: red;">{{ error }}</p>
+        {% endif %}
+
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <label for="ename">Enter Name:</label>
+            <input type="text" id="ename" name="ename" required><br>
+
+            <label for="epass">Enter Password:</label>
+            <input type="password" id="epass" name="epass" required><br>
+
+            <button type="submit">Login</button>
+        </form>
+    </div>
+    {% endblock %}
+</body>
+</html>

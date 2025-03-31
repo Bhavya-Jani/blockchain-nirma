@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign-Up Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: black;
+            text-align: center;
+            padding: 20px;
+            color: #FFD700;
+        }
+        .container {
+            background: #1a1a1a;
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+        }
+        h2 {
+            color: #FFD700;
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            text-align: left;
+            margin-top: 10px;
+            color: #FFD700;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #FFD700;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+            background-color: #1a1a1a;
+            color: #FFD700;
+        }
+        select {
+            appearance: none;
+            cursor: pointer;
+        }
+        select option {
+            padding: 10px;
+            font-size: 16px;
+            background-color: #1a1a1a;
+            color: #FFD700;
+        }
+        button {
+            margin-top: 20px;
+            width: 100%;
+            background-color: navy;
+            color: #FFD700;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #FFD700;
+            color: black;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: black;
+            padding: 15px;
+            color: #FFD700;
+            flex-wrap: wrap;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .tagline {
+            font-size: 14px;
+            font-style: italic;
+            color: navy;
+            text-align: right;
+        }
+        @media (max-width: 600px) {
+            .header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .tagline {
+                text-align: center;
+                margin-top: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">ROCKWALLET</div>
+        <div class="tagline">SMART, SECURE & BLOCKCHAIN POWERED</div>
+    </div>
+    {% extends 'base.html' %}
+    {% block 'content' %}
+    <div class="container">
+        <h2>Login Form</h2>
+        <form method="post" action="{% url 'wallet' %}" autocomplete="off">
+            {% csrf_token %}
+            
+            <label for="ename">Enter Name:</label>
+            <input type="text" id="ename" name="ename" pattern="[A-Za-z]+" required>
+            
+            <label for="epass">Enter Password:</label>
+            <input type="password" id="epass" name="epass" minlength="6" required>
+            
+            <label for="blockchain_network">Select Blockchain Network:</label>
+            <select id="blockchain_network" name="blockchain_network" required>
+                <option value="etherium">Ethereum</option>
+                <option value="linea">Linea</option>
+                <option value="polygon">Polygon</option>
+                <option value="base">Base</option>
+                <option value="blast">Blast</option>
+                <option value="optimism">Optimism</option>
+            </select>
+            
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    {% endblock %}
+</body> 
+</html>

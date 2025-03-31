@@ -57,7 +57,7 @@ ROOT_URLCONF = 'blockchain.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR,"template"],
+        'DIRS': [BASE_DIR,"templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -128,3 +128,5 @@ INFURA_URL = "https://mainnet.infura.io/v3/fb0e51784bc4476fb850692c69f4c728"
 SOLANA_RPC_URL = "https://api.mainnet-beta.solana.com"
 RECAPTCHA_SITE_KEY = "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"  # Google's test key
 RECAPTCHA_SECRET_KEY = "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe"  # Google's test secret
+X_FRAME_OPTIONS = "SAMEORIGIN"
+ENCRYPTION_KEY = 'your-secret-encryption-key-here'

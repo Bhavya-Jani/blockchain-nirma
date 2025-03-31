@@ -17,18 +17,23 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from blockchain import views
+from .api_views import get_wallets
 
 urlpatterns = [
     path('admin/', admin.site.urls),  # Default Admin Panel
     path('',views.homepage,name='Home'),
     path('try/',views.tryhtml,name='try'),
     path('login/', views.login_view, name='login'),
-    path('sign_up/',views.signin,name="signin"),
+    path('sign_up/',views.signin,name="signup"),
     path('status/', views.blockchain_status, name='blockchain_status'),
     path("solana-status/", views.solana_status_view, name="solana_status"),
     path("solana-latest-block/", views.solana_latest_block_view, name="solana_latest_block"),
     path("about_us/",views.aboutus,name="aboutus"),
     path("wallet/",views.wallet,name="wallet"),
+    path("info/",views.info,name="info"),
+    path('api/wallets/', get_wallets, name='get_wallets'),
+     
+
 
 
 

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>homepage</title>
+
+    <style>
+           ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            text-align: center;
+            background-color: black;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        li {
+            float: left;
+        }
+        li a {
+            display: block;
+            color: #FFD700;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        li a:hover {
+            background-color: navy;
+            color: #FFD700;
+            transition: 0.3s;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: black;
+            text-align: center;
+            padding: 20px;
+            color: #FFD700;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: black;
+            padding: 15px;
+            color: #FFD700;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .tagline {
+            font-size: 14px;
+            font-style: italic;
+            font-weight: bold;
+            color: #FFD700;
+        }
+        .container {
+            background: #1a1a1a;
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+        }
+        h2 {
+            color: #FFD700;
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            text-align: left;
+            margin-top: 10px;
+            color: #FFD700;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #FFD700;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+            background-color: #1a1a1a;
+            color: #FFD700;
+        }
+        button {
+            margin-top: 20px;
+            width: 100%;
+            background-color: navy;
+            color: #FFD700;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #FFD700;
+            color: black;
+        }
+    </style>
+</head>
+<body>   
+        <ul>
+        <li><a class="active" href={% url 'Home' %}>Home</a></li>
+        <li><a class="active" href={% url 'aboutus' %}>About Us</a></li>
+        <li><a class="active" href={% url 'login' %}>Login</a></li>
+        <li><a class="active" href={% url 'signup' %}>Sign Up</a></li>
+        <li><a class="active" href={% url 'info' %}>Info for Blockchains</a></li>
+        <li><a class="active" href="/admin/wallets/wallet/">Admin</a></li>
+        <li><a class="active" href="http://localhost:3000" target="_blank">React Application</a></li>
+       
+        </ul>
+        
+</body>
+</html>

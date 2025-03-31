@@ -6,12 +6,13 @@ from blockchain.web3_utils import get_connection_status
 from django.http import JsonResponse
 from .utils.solana_utils import get_solana_connection_status, get_latest_solana_block
 import requests
+from django.conf import settings
 
 def homepage(request):
     return render(request,"index.html")
 
 def aboutus(request):
-    return render(request,"about_us.html")
+    return render(request,"aboutus.html")
 
 def signin(request):
     return render(request,"sign_in.html")
@@ -94,7 +95,28 @@ def solana_latest_block_view(request):
 def wallet(request):
     return render(request,"wallet.html")
 
+def store_private_key(request):
+    """API to store a private key"""
+    if request.method == 'POST':
+        private_key = request.POST.get('private_key')
+        user = request.user  # Assumes the user is authenticated
+        wallet = BlockchainWallet.objects.get_or_create(user=user)[0]
+        wallet.set_private_key(private_key)
+        return JsonResponse({'message': 'Private key stored successfully!'})
+    return JsonResponse({'error': 'Invalid request'}, status=400)
 
+def get_private_key(request):
+    """API to retrieve a private key"""
+    if request.method == 'GET':
+        user = request.user  # Assumes the user is authenticated
+        try:
+            wallet = BlockchainWallet.objects.get(user=user)
+            private_key = wallet.get_private_key()
+            return JsonResponse({'private_key': private_key})
+        except BlockchainWallet.DoesNotExist:
+            return JsonResponse({'error': 'Wallet not found'}, status=404)
+    return JsonResponse({'error': 'Invalid request'}, status=400)
 
-
+def info(request):
+    return render(request,"info.html")
 
